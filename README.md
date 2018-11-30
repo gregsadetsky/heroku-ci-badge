@@ -56,6 +56,8 @@ If you're seeing...
 ![error badge](badges/error.svg)
 
 ... instead of a pass/fail mark, it means that the heroku-ci-badge app could not retrieve the build status.
+- Check that you've set the `HEROKU_AUTH_TOKEN` environment variable on your app
+- Check that your auth token is valid by running `heroku authorizations` Is your token in that list?
 - Check that you've set the `PIPELINE_ID` environment variable on your app
 - Check that the `PIPELINE_ID` value is valid by checking the pipeline URL https://dashboard.heroku.com/pipelines/{pipeline ID}
 - Check the app's log outputs for errors: `heroku log -a {deployed app name}`
