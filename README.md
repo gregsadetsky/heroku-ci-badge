@@ -2,7 +2,7 @@
 
 Get a Heroku CI badge for your repo's README file.
 
-![example badge](badges/pass.svg)
+![example badge](badges/succeeded.svg)
 
 
 ## Requirements
