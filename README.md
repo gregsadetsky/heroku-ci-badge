@@ -63,8 +63,21 @@ If you're seeing...
 - Check the app's log outputs for errors: `heroku log -a {deployed app name}`
 
 
+## Updating the app
+
+Updating the app's code once it's deployed is not as easy as doing the initial deployment (i.e., it's not a single click). Based on the instructions [here](https://f-a.nz/dev/update-deploy-to-heroku-app/), here are the steps to update deployed `heroku-ci-badge` apps:
+
+    cd {some directory}
+    git init
+    heroku git:remote -a {deployed app name}
+    git remote add origin https://github.com/gregsadetsky/heroku-ci-badge
+    git pull origin master
+    git push heroku master
+
+
 ## TODO
 
+- Document how to update code from this repo to an already deployed app
 - Support more than 1 pipeline (use /pipelines/{ID}/x.svg ?)
 - Support master and other branches (use /{branch}.svg and /pipelines/{branch}.svg ?)
 - Dogfood: use Heroku CI & show badge for this app
