@@ -4,7 +4,7 @@
   "repository": "https://github.com/gregsadetsky/heroku-ci-badge",
   "env": {
     "HEROKU_AUTH_TOKEN": {
-      "description": "Heroku Authorization Token for this app. Generate using: `heroku authorizations:create -s \"read\" -S -d \"heroku ci badge\"`",
+      "description": "Heroku Authorization Token for this app. Generate using: heroku authorizations:create -s \"read\" -S -d \"heroku ci badge\"",
       "value": ""
     },
     "PIPELINE_ID": {

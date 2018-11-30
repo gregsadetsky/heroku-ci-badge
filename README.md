@@ -14,32 +14,25 @@ Get a Heroku CI badge for your repo's README file.
 
 ## Steps
 
-### Deploy this app to your account
+### Deploy this app to your account (the app sets up a free dyno and a free Redis addon)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-Note the deployed app name -- you'll need it for later.
+During the setup, you will be asked to fill out two environment variables:
 
-TODO check -- does procfile auto-start web worker?
-TODO check -- does heroku app setup asp for env variable values?
+#### HEROKU_AUTH_TOKEN
 
-### Create an authorization token
+Generate a token using
 
-    HEROKU_AUTH_TOKEN=`heroku authorizations:create -s "read" -S -d "heroku ci badge"`
+    heroku authorizations:create -s "read" -S -d "heroku-ci-badge"
 
-### Set the token as an environment variable on the app
+#### PIPELINE_ID
 
-    heroku config:set HEROKU_AUTH_TOKEN=`echo $HEROKU_AUTH_TOKEN` -a {deployed app name}
+This should be the UUID of the pipeline to which Heroku CI is attached (`9478101b-...`) rather than the name of the pipeline (`myapp-pipeline`).
 
-### Set the ID of your pipeline as an environment variable on the app
+### Once the app has been deployed, click the "View" button to see it.
 
-    heroku config:set PIPELINE_ID="{pipeline ID}" -a {deployed app name}
-
-Note that this should be the UUID of the pipeline (`9478101b-...`) rather than the name (`myapp-pipeline`) of the pipeline.
-
-### Test the badge
-
-    heroku apps:open /last.svg -a {deployed app name}
+Go to `/` or `/last.svg` (you should be automatically redirected there) to see the badge.
 
 ### Insert the badge into your README.md
 
@@ -47,7 +40,7 @@ Note that this should be the UUID of the pipeline (`9478101b-...`) rather than t
 
 ### Optional
 
-Change how frequently the build result badge refreshes by setting the `CACHE_TIMEOUT` env var (in seconds). The default value is 15 minutes.
+Change how frequently the build result badge refreshes by setting the `CACHE_TIMEOUT` environment var (in seconds). The default value is 15 minutes.
 
     heroku config:set CACHE_TIMEOUT="300" -a {deployed app name}
 
@@ -77,10 +70,7 @@ If you're seeing...
 - Test incorrect heroku credentials
 - Test incorrect pipeline id
 - Test heroku error response
-
-- Heroku deploy button (app.json?)
-- Dog food: test & have badge for this app!
-- Check that -s scope read is enough to get build status (need read-protected? more?)
+- Dog food: use Heroku CI & have badge for this app!
 
 - Support more than 1 pipeline (use /pipelines/{ID}/x.svg path?)
 - Support master and other branches (use /{branch}.svg and /piplines/{branch}.svg ?)
