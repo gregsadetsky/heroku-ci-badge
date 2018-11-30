@@ -7,14 +7,14 @@ Get a Heroku CI badge for your repo's README file.
 
 ## Requirements
 
-- Have a Heroku app
-- Have a [Heroku Pipeline](https://devcenter.heroku.com/articles/pipelines) configured for that app
+- A Heroku app
+- A [Heroku Pipeline](https://devcenter.heroku.com/articles/pipelines) configured for that app
 - Use [Heroku CI](https://devcenter.heroku.com/articles/heroku-ci) for that pipeline
 
 
 ## Steps
 
-### Deploy this app to your account (the app sets up a free dyno and a free Redis addon)
+### Deploy this app to your account (this sets up a free dyno and a free Redis addon)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -32,7 +32,7 @@ This should be the UUID of the pipeline to which Heroku CI is attached (`9478101
 
 ### Once the app has been deployed, click the "View" button to see it.
 
-Go to `/` or `/last.svg` (you should be automatically redirected there) to see the badge.
+Go to `/last.svg` to see the badge.
 
 ### Insert the badge into your README.md
 
@@ -67,6 +67,7 @@ If you're seeing...
 
 ## TODO
 
+- Implement redirect from / to /last.svg (& update documentation)
 - Test incorrect heroku credentials
 - Test incorrect pipeline id
 - Test heroku error response
