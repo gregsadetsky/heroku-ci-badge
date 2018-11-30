@@ -4,17 +4,6 @@ import requests
 import flask
 
 
-
-# FIXME
-# FIXME
-# FIXME
-# FIXME
-from http.client import HTTPConnection
-HTTPConnection.debuglevel = 1
-
-
-
-
 HEROKU_API_SERVER = 'https://api.heroku.com/'
 
 def do_request(path):
