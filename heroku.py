@@ -46,9 +46,17 @@ def get_last_test_run_status():
     flask.current_app.logger.error('pipeline has no test results')
     return None
 
-  # unexpected result
-  if 'status' not in res[0]:
-    flask.current_app.logger.error('no `status` found for latest test result')
+  found_status = None
+  for result in res:
+    if 'status' not in result:
+      continue
+    # skip currently running test to return first 'final' result
+    if result['status'] == 'running':
+      continue
+    found_status = result['status']
+    break
+  else:
+    flask.current_app.logger.error('could not find any build status')
     return None
 
-  return res[0]['status']
+  return found_status
