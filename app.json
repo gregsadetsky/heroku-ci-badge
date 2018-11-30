@@ -13,7 +13,8 @@
     },
     "CACHE_TIMEOUT": {
       "description": "Number of seconds to cache the build result (15 minutes by default)",
-      "value": "900"
+      "value": "900",
+      "required": false
     }
   },
   "addons": [
