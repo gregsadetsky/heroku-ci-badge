@@ -1,20 +1,20 @@
 import os
 
-from flask import Flask, send_from_directory, redirect
-from heroku import get_last_test_run_status
 import redis
+from heroku import get_last_test_run_status
+from flask import Flask, send_from_directory, redirect
+from nocache import nocache
 
 app = Flask(__name__)
 
-BADGE_DIR = 'badges'
+BADGE_DIR = './badges'
 CACHE_TIMEOUT_DEFAULT = 900
-RESULT_TO_BADGE = {
-  'succeeded': 'pass',
-  'failed': 'fail'
-}
+REDIS_CONNECT_TIMEOUT = 10
+BADGES_ENUM = ('succeeded', 'failed')
+FILES_ENUM = BADGES_ENUM + ('error',)
 
 def send_badge_file(badge):
-  print('send_from_directory', badge)
+  assert badge in FILES_ENUM
   return send_from_directory(
     BADGE_DIR,
     '{}.svg'.format(badge)
@@ -26,20 +26,28 @@ def index():
 
 
 @app.route('/last.svg')
+@nocache
 def last_test():
   # check presence of mandatory env vars
-  if os.getenv('HEROKU_AUTH_TOKEN') is None or \
-      os.getenv('PIPELINE_ID') is None or \
-      os.getenv('REDIS_URL') is None:
-    app.logger.info('1 or more mandatory env vars not set (see README)')
+  if os.getenv('PIPELINE_ID') is None:
+    app.logger.info('mandatory PIPELINE_ID env var not set (see README.md)')
     return send_badge_file('error')
 
-  # TODO catch error (wrong redis credentials) and log it
-  r = redis.from_url(os.environ.get('REDIS_URL'))
+  if os.getenv('REDIS_URL') is None:
+    app.logger.info('mandatory REDIS_URL env var not set (did you provision a redis add-on?)')
+    return send_badge_file('error')
 
-  # is there a cached result?
-  result = r.get('build_result')
+  r = redis.from_url(os.environ.get('REDIS_URL'), socket_connect_timeout=REDIS_CONNECT_TIMEOUT)
+
+  try:
+    # is there a cached result?
+    result = r.get('build_result')
+  except redis.exceptions.ConnectionError:
+    app.logger.error('could not connect to redis')
+    return send_badge_file('error')
+
   if result is not None:
+    # good to go -- return cached result
     return send_badge_file(result.decode('ascii'))
 
   # no cached result, fetch info from heroku
@@ -49,7 +57,7 @@ def last_test():
     app.logger.error('could not get result from Heroku')
     return send_badge_file('error')
 
-  if result not in RESULT_TO_BADGE:
+  if result not in BADGES_ENUM:
     # fallback in case of unexpected result
     app.logger.error('got unexpected build status: {}'.format(result))
     return send_badge_file('error')
@@ -60,15 +68,13 @@ def last_test():
   # the given timeout is valid
   # or there was no given timeout (will then use default)
   if cache_timeout.isdigit():
-    cache_timeout = int(CACHE_TIMEOUT_DEFAULT)
+    cache_timeout = int(cache_timeout)
   else:
     # we were given a timeout, but in an incorrect format
     app.logger.error('CACHE_TIMEOUT is not a valid int')
     cache_timeout = CACHE_TIMEOUT_DEFAULT
 
-  badge = RESULT_TO_BADGE[result]
-
   # since we have a good result, cache it
-  r.set('build_result', badge, ex=cache_timeout)
+  res = r.set('build_result', result, ex=cache_timeout)
 
-  return send_badge_file(badge)
+  return send_badge_file(result)

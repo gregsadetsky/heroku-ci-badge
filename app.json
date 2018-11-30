@@ -3,10 +3,6 @@
   "description": "Heroku CI badge generator",
   "repository": "https://github.com/gregsadetsky/heroku-ci-badge",
   "env": {
-    "HEROKU_AUTH_TOKEN": {
-      "description": "To generate a token: heroku authorizations:create -s \"read\" -S -d \"heroku ci badge\"",
-      "value": ""
-    },
     "PIPELINE_ID": {
       "description": "UUID of the pipeline for which Heroku CI is enabled",
       "value": ""

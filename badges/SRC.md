@@ -1,8 +1,8 @@
-## pass.svg
+## succeeded.svg
 
 https://img.shields.io/badge/CI-%E2%9C%93-green.svg?logo=heroku&colorA=79589f&logoColor=white
 
-## fail.svg
+## failed.svg
 
 https://img.shields.io/badge/CI-%E2%9C%97-red.svg?logo=heroku&colorA=79589f&logoColor=white
 

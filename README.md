@@ -18,13 +18,7 @@ Get a Heroku CI badge for your repo's README file.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-During the setup, you will be asked to fill out two environment variables:
-
-#### HEROKU_AUTH_TOKEN
-
-Generate a token using
-
-    heroku authorizations:create -s "read" -S -d "heroku-ci-badge"
+During the setup, you will be asked to fill out an environment variable:
 
 #### PIPELINE_ID
 
@@ -56,8 +50,6 @@ If you're seeing...
 ![error badge](badges/error.svg)
 
 ... instead of a pass/fail mark, it means that the heroku-ci-badge app could not retrieve the build status.
-- Check that you've set the `HEROKU_AUTH_TOKEN` environment variable on your app
-- Check that your auth token is valid by running `heroku authorizations`. Is your token in that list?
 - Check that you've set the `PIPELINE_ID` environment variable on your app
 - Check that the `PIPELINE_ID` value is valid by checking the pipeline URL https://dashboard.heroku.com/pipelines/{pipeline ID}
 - Check the app's log outputs for errors: `heroku log -a {deployed app name}`
@@ -65,13 +57,9 @@ If you're seeing...
 
 ## TODO
 
-- Test incorrect heroku credentials
-- Test incorrect pipeline id
-- Test heroku error response
-- Dog food: use Heroku CI & have badge for this app!
-
-- Support more than 1 pipeline (use /pipelines/{ID}/x.svg path?)
+- Support more than 1 pipeline (use /pipelines/{ID}/x.svg ?)
 - Support master and other branches (use /{branch}.svg and /pipelines/{branch}.svg ?)
+- Dogfood: use Heroku CI & show badge for this app
 
 
 ## Thanks
