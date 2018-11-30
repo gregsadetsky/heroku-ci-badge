@@ -16,7 +16,16 @@
       "value": "900"
     }
   },
-  "addons": {
+  "addons": [
     "heroku-redis:hobby-dev"
-  }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "buildpacks": [{
+    "url": "heroku/python"
+  }]
 }
