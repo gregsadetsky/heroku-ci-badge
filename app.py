@@ -29,6 +29,10 @@ def index():
 @nocache
 def last_test():
   # check presence of mandatory env vars
+  if os.getenv('HEROKU_AUTH_TOKEN') is None:
+    app.logger.info('mandatory HEROKU_AUTH_TOKEN env var not set (see README.md)')
+    return send_badge_file('error')
+
   if os.getenv('PIPELINE_ID') is None:
     app.logger.info('mandatory PIPELINE_ID env var not set (see README.md)')
     return send_badge_file('error')

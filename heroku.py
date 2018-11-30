@@ -4,21 +4,42 @@ import requests
 import flask
 
 
+
+# FIXME
+# FIXME
+# FIXME
+# FIXME
+from http.client import HTTPConnection
+HTTPConnection.debuglevel = 1
+
+
+
+
 HEROKU_API_SERVER = 'https://api.heroku.com/'
 
 def do_request(path):
-  r = requests.get(
+  api_token = os.getenv('HEROKU_AUTH_TOKEN')
+  assert api_token is not None, 'HEROKU_AUTH_TOKEN not set'
+
+  s = requests.session()
+  # disable using local netrc.
+  # simplifies local development as the netrc heroku CLI
+  # credentials should not be used here.
+  # https://github.com/requests/requests/issues/2773
+  s.trust_env = False
+  result = s.get(
     '{}{}'.format(HEROKU_API_SERVER, path),
     headers={
       'Accept': 'application/vnd.heroku+json; version=3',
+      'Authorization': 'Bearer {}'.format(api_token)
     }
   )
 
-  if not r.status_code == requests.codes.ok:
-    flask.current_app.logger.error('heroku returned status code {}'.format(r.status_code))
+  if not result.status_code == requests.codes.ok:
+    flask.current_app.logger.error('heroku returned status code {}'.format(result.status_code))
     return None
 
-  return r.json()
+  return result.json()
 
 def get_last_test_run_status():
   pipeline_id = os.getenv('PIPELINE_ID')

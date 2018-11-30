@@ -18,7 +18,13 @@ Get a Heroku CI badge for your repo's README file.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-During the setup, you will be asked to fill out an environment variable:
+During the setup, you will be asked to fill out two environment variables:
+
+#### HEROKU_AUTH_TOKEN
+
+Generate a token using
+
+    heroku authorizations:create -s "read" -S -d "heroku-ci-badge"
 
 #### PIPELINE_ID
 
