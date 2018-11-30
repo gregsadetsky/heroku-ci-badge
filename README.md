@@ -77,7 +77,6 @@ Updating the app's code once it's deployed is not as easy as doing the initial d
 
 ## TODO
 
-- Document how to update code from this repo to an already deployed app
 - Support more than 1 pipeline (use /pipelines/{ID}/x.svg ?)
 - Support master and other branches (use /{branch}.svg and /pipelines/{branch}.svg ?)
 - Dogfood: use Heroku CI & show badge for this app
