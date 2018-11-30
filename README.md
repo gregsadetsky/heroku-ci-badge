@@ -73,13 +73,13 @@ If you're seeing...
 - Dog food: use Heroku CI & have badge for this app!
 
 - Support more than 1 pipeline (use /pipelines/{ID}/x.svg path?)
-- Support master and other branches (use /{branch}.svg and /piplines/{branch}.svg ?)
+- Support master and other branches (use /{branch}.svg and /pipelines/{branch}.svg ?)
 
 
 ## Thanks
 
-- [Shields.io](https://shields.io/) for the dynamic shield svg
-- Ismar Slomic for the [question & motivation](https://stackoverflow.com/questions/50918181/heroku-ci-status-badge)
+- [Shields.io](https://shields.io/) for the shield svg.
+- Ismar Slomic for the [question & motivation](https://stackoverflow.com/questions/50918181/heroku-ci-status-badge).
 - Heroku, for being awesome.
 
 
