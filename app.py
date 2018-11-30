@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, redirect
 from heroku import get_last_test_run_status
 import redis
 
@@ -19,6 +19,11 @@ def send_badge_file(badge):
     BADGE_DIR,
     '{}.svg'.format(badge)
   )
+
+@app.route('/')
+def index():
+  return redirect('/last.svg')
+
 
 @app.route('/last.svg')
 def last_test():

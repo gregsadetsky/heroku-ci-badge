@@ -32,7 +32,7 @@ This should be the UUID of the pipeline to which Heroku CI is attached (`9478101
 
 ### Once the app has been deployed, click the "View" button to see it.
 
-Go to `/last.svg` to see the badge.
+You will be redirected to `/last.svg`, the URL for the dynamic badge.
 
 ### Insert the badge into your README.md
 
@@ -55,7 +55,7 @@ If you're seeing...
 
 ![error badge](badges/error.svg)
 
-... instead of a pass/fail mark, it means that the heroku-ci-badge app cannot retrieve the build status.
+... instead of a pass/fail mark, it means that the heroku-ci-badge app could not retrieve the build status.
 - Check that you've set the `HEROKU_AUTH_TOKEN` environment variable on your app
 - Check that your auth token is valid by running `heroku authorizations`. Is your token in that list?
 - Check that you've set the `PIPELINE_ID` environment variable on your app
@@ -65,7 +65,6 @@ If you're seeing...
 
 ## TODO
 
-- Implement redirect from / to /last.svg (& update documentation)
 - Test incorrect heroku credentials
 - Test incorrect pipeline id
 - Test heroku error response
