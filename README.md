@@ -46,7 +46,7 @@ Change how frequently the build result badge refreshes by setting the `CACHE_TIM
 
 Note that a shorter cache period will result in more calls to the Heroku API, which may lead to elevated errors.
 
-Setting a `CACHE_TIMEOUT` to `0` is _strongly_ discouraged.
+Setting `CACHE_TIMEOUT` to `0` is _strongly_ discouraged.
 
 
 ## Notes
