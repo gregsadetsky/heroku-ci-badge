@@ -60,9 +60,7 @@ If you're seeing...
 - Check that your auth token is valid by running `heroku authorizations`. Is your token in that list?
 - Check that you've set the `PIPELINE_ID` environment variable on your app
 - Check that the `PIPELINE_ID` value is valid by checking the pipeline URL https://dashboard.heroku.com/pipelines/{pipeline ID}
-- Check the app's log outputs for errors
-
-    heroku log -a {deployed app name}
+- Check the app's log outputs for errors: `heroku log -a {deployed app name}`
 
 
 ## TODO
