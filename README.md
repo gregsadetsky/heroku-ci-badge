@@ -57,7 +57,7 @@ If you're seeing...
 
 ... instead of a pass/fail mark, it means that the heroku-ci-badge app could not retrieve the build status.
 - Check that you've set the `HEROKU_AUTH_TOKEN` environment variable on your app
-- Check that your auth token is valid by running `heroku authorizations` . Note that token IDs (shown in the list) and the token values are not the same. Do you see the "heroku-ci-badge" token generated previously? If you run `heroku authorizations:info {token id}` is the `Token: {token uuid}` value the same as the one you set as the `HEROKU_AUTH_TOKEN` environment variable?
+- Check that your auth token is valid by running `heroku authorizations` . Note that token _IDs_ (shown in the list) and the token _values_ are not the same. Do you see the "heroku-ci-badge" token generated previously? If you run `heroku authorizations:info {token id}` is the `Token: {token value}` value the same as the one you set as the `HEROKU_AUTH_TOKEN` environment variable?
 - Check that you've set the `PIPELINE_ID` environment variable on your app
 - Check that the `PIPELINE_ID` value is valid by checking the pipeline URL https://dashboard.heroku.com/pipelines/{pipeline ID}
 - Check the app's log outputs for errors: `heroku log -a {deployed app name}`
