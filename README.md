@@ -86,7 +86,7 @@ Updating the app's code once it's deployed is not as easy as doing the initial d
 
 - [Shields.io](https://shields.io/) for the shield svg.
 - Ismar Slomic for the [question & motivation](https://stackoverflow.com/questions/50918181/heroku-ci-status-badge).
-- Franz Geffke for the instructions on [updating a Heroku app](https://f-a.nz/dev/update-deploy-to-heroku-app/) from a repo.
+- Franz Geffke for the instructions on [updating a Heroku app](https://f-a.nz/dev/update-deploy-to-heroku-app/) after it was deployed using a "Deploy to Heroku" button.
 - Heroku, for being awesome.
 
 
