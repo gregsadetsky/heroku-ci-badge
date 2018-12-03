@@ -14,7 +14,7 @@ Get a Heroku CI badge for your repo's README file.
 
 ## Steps
 
-### Deploy this app to your account (this sets up a free dyno and a free Redis addon)
+### 1. Deploy this app to your account
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
@@ -30,11 +30,11 @@ Generate a token using
 
 This should be the UUID of the pipeline to which Heroku CI is attached (`9478101b-...`) rather than the name of the pipeline (`myapp-pipeline`).
 
-### Once the app has been deployed, click the "View" button to see it.
+### 2. Once the app has been deployed, click the "View" button to see it.
 
 You will be redirected to `/last.svg`, the URL for the dynamic badge.
 
-### Insert the badge into your README.md
+### 3. Insert the badge into your README.md
 
     [![Heroku CI Status](https://{deployed app name}.herokuapp.com/last.svg)](https://dashboard.heroku.com/pipelines/{pipeline ID}/tests)
 
@@ -49,7 +49,7 @@ Note that a shorter cache period will result in more calls to the Heroku API, wh
 Setting `CACHE_TIMEOUT` to `0` is _strongly_ discouraged.
 
 
-## Notes
+## Troubleshooting
 
 If you're seeing...
 
@@ -62,6 +62,13 @@ If you're seeing...
 - Check that the `PIPELINE_ID` value is valid by checking the pipeline URL `https://dashboard.heroku.com/pipelines/{pipeline ID}`
 - Check the app's log outputs for errors: `heroku log -a {deployed app name}`
 
+If you're seeing...
+
+![image not found](badges/chrome-noimage.png)
+
+... it means that:
+- the image URL might be wrong (check the public URL to your deployed app, and that you're referencing `/last.svg`)
+- your heroku-ci-badge app might be sleeping if you're using a Free Dyno. See [here](https://devcenter.heroku.com/articles/free-dyno-hours#dyno-sleeping): "If an app has a Free web dyno, and that dyno receives no web traffic in a 30-minute period, it will sleep". Upgrade the dyno type to `hobby` (7$/month) to remedy.
 
 ## Updating the app
 
