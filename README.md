@@ -74,10 +74,16 @@ If you're seeing...
 
 Updating the app's code once it's deployed is not as easy as doing the initial deployment (i.e., it's not a single click). Based on the instructions [here](https://f-a.nz/dev/update-deploy-to-heroku-app/), here are the steps to update deployed `heroku-ci-badge` apps:
 
+    # instructions for the first update only (see below for further updates)
     cd {some directory}
     git init
     heroku git:remote -a {deployed app name}
     git remote add origin https://github.com/gregsadetsky/heroku-ci-badge
+    git pull origin master
+    git push heroku master
+
+For further updates:
+
     git pull origin master
     git push heroku master
 
