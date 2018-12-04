@@ -50,8 +50,8 @@ def get_last_test_run_status():
   for result in res:
     if 'status' not in result:
       continue
-    # skip currently running test to return first 'final' result
-    if result['status'] == 'running':
+    # skip currently building/running tests to return first 'final' result
+    if result['status'] in ['building', 'running']:
       continue
     found_status = result['status']
     break
