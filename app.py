@@ -1,4 +1,5 @@
 import os
+import logging
 
 import redis
 from heroku import get_last_test_run_status
@@ -7,10 +8,16 @@ from nocache import nocache
 
 app = Flask(__name__)
 
+# https://medium.com/@trstringer/logging-flask-and-gunicorn-the-manageable-way-2e6f0b8beb2f
+if __name__ != '__main__':
+  gunicorn_logger = logging.getLogger('gunicorn.error')
+  app.logger.handlers = gunicorn_logger.handlers
+  app.logger.setLevel(gunicorn_logger.level)
+
 BADGE_DIR = './badges'
 CACHE_TIMEOUT_DEFAULT = 900
 REDIS_CONNECT_TIMEOUT = 10
-BADGES_ENUM = ('succeeded', 'failed')
+BADGES_ENUM = ('succeeded', 'failed', 'errored')
 FILES_ENUM = BADGES_ENUM + ('error',)
 
 def send_badge_file(badge):
