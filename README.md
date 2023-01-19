@@ -1,3 +1,9 @@
+# Archived / Unmaintained / Unsupported
+
+Alas, I don't recommend starting any new projects on Heroku. You should probably move to Render, Fly, Railway or any other alternative. Cheers
+
+---
+
 # heroku-ci-badge
 
 Get a Heroku CI badge for your repo's README file.
